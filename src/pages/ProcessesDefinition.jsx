@@ -7,9 +7,8 @@ import { setShowModal } from "../store/slice/processSlice";
 
 export default function ProcessesDefinition() {
   const { isError, isLoading, data } = useAllProcessesQuery();
-  const { showModal, processKey, processFields, processBody } = useSelector(
-    state => state.process
-  );
+  const { showModal, processKey, processFields, processBody, processHtmlForm } =
+    useSelector(state => state.process);
   return isLoading ? (
     <div>Loading</div>
   ) : (
@@ -30,6 +29,7 @@ export default function ProcessesDefinition() {
         name={"sad"}
         fields={processFields}
         processBody={processBody}
+        processHtmlForm={processHtmlForm}
       />
     </div>
   );

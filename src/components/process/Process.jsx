@@ -1,7 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setProcessKey } from "../../store/slice/processSlice";
+import {
+  getProcessHtmlForm,
+  setProcessKey,
+} from "../../store/slice/processSlice";
 import { getProcessFields } from "./../../store/slice/processSlice";
 
 export default function Process({
@@ -18,7 +21,8 @@ export default function Process({
       <button
         className='bg-slate-400 p-1 rounded-lg text-white'
         onClick={async () => {
-          dispatch(getProcessFields(pkey));
+          // dispatch(getProcessFields(pkey));
+          dispatch(getProcessHtmlForm(pkey));
           dispatch(setShowModal());
         }}
       >

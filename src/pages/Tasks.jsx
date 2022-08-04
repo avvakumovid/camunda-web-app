@@ -5,7 +5,7 @@ import Task from "../components/task/Task";
 export default function Tasks() {
   const { isLoading, isError, data } = useAllTasksQuery();
   useEffect(() => {
-    console.log(data);
+    //console.log(data);
   }, [data]);
   return isLoading ? (
     <div>Loading</div>

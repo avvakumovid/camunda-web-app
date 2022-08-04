@@ -16,13 +16,23 @@ export const processesApi = createApi({
         url: "/task",
       }),
     }),
+    getProcessForm: build.query({
+      query: processId => ({
+        url: `/process-definition/${processId}/deployed-start-form`,
+      }),
+    }),
     getTaskForm: build.query({
       query: taskId => ({
         url: `/task/${taskId}/deployed-form`,
       }),
+      transformResponse: (...arg) => console.log(arg),
     }),
   }),
 });
 
-export const { useAllProcessesQuery, useAllTasksQuery, useGetTaskFormQuery } =
-  processesApi;
+export const {
+  useAllProcessesQuery,
+  useAllTasksQuery,
+  useGetTaskFormQuery,
+  useGetProcessFormQuery,
+} = processesApi;

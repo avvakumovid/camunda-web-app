@@ -6,6 +6,7 @@ const initialState = {
   processKey: null,
   processFields: null,
   processBody: {},
+  processHtmlForm: null,
 };
 
 export const getProcessFields = createAsyncThunk(
@@ -16,6 +17,21 @@ export const getProcessFields = createAsyncThunk(
     );
 
     return { fields: response.data.components, key: processKey };
+  }
+);
+
+export const getProcessHtmlForm = createAsyncThunk(
+  "process/getProcessHtmlForm",
+  async function (processKey) {
+    const response = await axios.get(
+      `http://localhost:8080/engine-rest/process-definition/key/${processKey}/deployed-start-form`
+    );
+
+    return {
+      form: response.data,
+      // .replaceAll("\n", "").replaceAll("\r", ""),
+      key: processKey,
+    };
   }
 );
 
@@ -46,28 +62,41 @@ const processSlice = createSlice({
   },
   extraReducers: {
     [getProcessFields.fulfilled]: (state, action) => {
-      console.log("getProcessFields.fulfilled", action.payload);
+      // //console.log("getProcessFields.fulfilled", action.payload);
       state.processFields = action.payload.fields;
       state.processKey = action.payload.key;
     },
     [getProcessFields.rejected]: (state, action) => {
-      console.log("getProcessFields.rejected", action.payload);
+      // //console.log("getProcessFields.rejected", action.payload);
       state.processFields = action.payload;
     },
     [getProcessFields.pending]: (state, action) => {
-      console.log("getProcessFields.pending", action.payload);
+      // //console.log("getProcessFields.pending", action.payload);
       state.processFields = action.payload;
     },
+    [getProcessHtmlForm.fulfilled]: (state, action) => {
+      // //console.log("getProcessHtmlForm.fulfilled", action.payload);
+      state.processHtmlForm = action.payload.form;
+      state.processKey = action.payload.key;
+    },
+    [getProcessHtmlForm.rejected]: (state, action) => {
+      // //console.log("getProcessHtmlForm.rejected", action.payload);
+      // state.processFields = action.payload;
+    },
+    [getProcessHtmlForm.pending]: (state, action) => {
+      // //console.log("getProcessHtmlForm.pending", action.payload);
+      // state.processFields = action.payload;
+    },
     [startProcess.fulfilled]: (state, action) => {
-      console.log("startProcess.fulfilled", action.payload);
+      // //console.log("startProcess.fulfilled", action.payload);
       // state.processFields = action.payload;
     },
     [startProcess.rejected]: (state, action) => {
-      console.log("startProcess.rejected", action.payload);
+      // //console.log("startProcess.rejected", action.payload);
       // state.processFields = action.payload;
     },
     [startProcess.pending]: (state, action) => {
-      console.log("startProcess.pending", action.payload);
+      // //console.log("startProcess.pending", action.payload);
       // state.processFields = action.payload;
     },
   },

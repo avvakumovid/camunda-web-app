@@ -19,7 +19,7 @@ export default function Radio({ name, values, label, required }) {
                 name={name}
                 value={value.value}
                 onChange={e => {
-                  console.log(e.currentTarget.value);
+                  //console.log(e.currentTarget.value);
                   dispatch(
                     setProcessBody({
                       [name]: {
