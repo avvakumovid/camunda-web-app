@@ -27,6 +27,16 @@ export const processesApi = createApi({
       }),
       transformResponse: (...arg) => console.log(arg),
     }),
+    getTaskFormVariables: build.query({
+      query: taskId => ({
+        url: `/task/${taskId}/form-variables?deserializeValues=true`,
+      }),
+    }),
+    getProccesXML: build.query({
+      query: processId => ({
+        url: `/process-definition/key/${processId}/xml`,
+      }),
+    }),
   }),
 });
 
@@ -35,4 +45,6 @@ export const {
   useAllTasksQuery,
   useGetTaskFormQuery,
   useGetProcessFormQuery,
+  useGetTaskFormVariablesQuery,
+  useGetProccesXMLQuery,
 } = processesApi;

@@ -10,6 +10,9 @@ export default function Header() {
       <Link className='mr-2 text-white text-xl' to='/tasks'>
         Задачи
       </Link>
+      {/* <Link className='mr-2 text-white text-xl' to='/diargam'>
+        Диаграмма
+      </Link> */}
     </div>
   );
 }
