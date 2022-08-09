@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, version } from "react";
 import Process from "../components/process/Process";
 import { useAllProcessesQuery } from "../store/processes/processes.api";
 import ProcessStartModal from "../components/processStartModal/ProcessStartModal";
@@ -9,20 +9,51 @@ export default function ProcessesDefinition() {
   const { isError, isLoading, data } = useAllProcessesQuery();
   const { showModal, processKey, processFields, processBody, processHtmlForm } =
     useSelector(state => state.process);
+  const [processes, setprocesses] = useState([]);
+  // let processes = [];
+  useEffect(() => {
+    if (data) {
+      const datsa = [...data];
+
+      setprocesses(
+        datsa
+          .sort((a, b) => {
+            if (a.name == b.name) {
+              if (a.version > b.version) {
+                return -1;
+              }
+              if (a.version < b.version) {
+                return 1;
+              }
+            }
+            if (a.name > b.name) {
+              return -1;
+            }
+            if (a.name < b.name) {
+              return 1;
+            }
+          })
+          .map(p => {
+            return (
+              <Process
+                deploymentId={p.deploymentId}
+                name={p.name}
+                pkey={p.key}
+                key={p.id}
+                id={p.id}
+                setShowModal={setShowModal}
+                version={p.version}
+              />
+            );
+          })
+      );
+    }
+  }, [data]);
   return isLoading ? (
     <div>Loading</div>
   ) : (
     <div className='p-3'>
-      {data.map(p => (
-        <Process
-          deploymentId={p.deploymentId}
-          name={p.name}
-          pkey={p.key}
-          key={p.id}
-          id={p.id}
-          setShowModal={setShowModal}
-        />
-      ))}
+      {processes}
       <ProcessStartModal
         show={showModal}
         setShowModal={setShowModal}

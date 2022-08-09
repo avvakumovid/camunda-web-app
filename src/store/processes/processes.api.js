@@ -8,7 +8,7 @@ export const processesApi = createApi({
   endpoints: build => ({
     allProcesses: build.query({
       query: () => ({
-        url: "/process-definition?latestVersion=true",
+        url: "/process-definition",
       }),
     }),
     allTasks: build.query({
@@ -34,7 +34,7 @@ export const processesApi = createApi({
     }),
     getProccesXML: build.query({
       query: processId => ({
-        url: `/process-definition/key/${processId}/xml`,
+        url: `/process-definition/${processId}/xml`,
       }),
     }),
   }),

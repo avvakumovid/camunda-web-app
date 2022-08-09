@@ -14,15 +14,18 @@ export default function Process({
   id,
   pkey,
   setShowModal,
+  version,
 }) {
   const dispatch = useDispatch();
   return (
     <div className='h-16 border-2 p-2 border-purple-400 rounded-md flex flex-row justify-between items-center mb-1'>
-      <span>{name}</span>
+      <span>
+        {name}:{version}
+      </span>
       <div>
         <Link
           className='bg-slate-400 p-1 rounded-lg text-white mr-2'
-          to={`/diargam${pkey}`}
+          to={`/diargam${id}`}
         >
           Диаграмма
         </Link>
