@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import Form from "../components/form/Form";
 import {
   useGetTaskFormQuery,
   useGetTaskFormVariablesQuery,
 } from "../store/processes/processes.api";
-import { useSelector } from "react-redux";
 import FormAlt from "../components/form/FormAlt";
 
 export default function TaskInstance() {
@@ -23,8 +21,6 @@ export default function TaskInstance() {
     <div>Loading</div>
   ) : (
     <div className='p-3'>
-      {/* <Form fields={data.components} /> */}
-
       {error?.originalStatus == 200 ? (
         <form
           onSubmit={e => {
@@ -33,12 +29,10 @@ export default function TaskInstance() {
               if (target.type == "checkbox") {
                 console.log(target.checked);
               }
-              // console.log(target);
             }
             const el = document.createElement("html");
             el.innerHTML(obj);
             console.log(el);
-            // console.log(JSON.stringify(obj));
           }}
         >
           <FormAlt data={data} />
