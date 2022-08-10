@@ -24,7 +24,7 @@ export const getProcessHtmlForm = createAsyncThunk(
   "process/getProcessHtmlForm",
   async function (processKey) {
     const response = await axios.get(
-      `http://localhost:8080/engine-rest/process-definition/key/${processKey}/deployed-start-form`
+      `http://localhost:8080/engine-rest/process-definition/${processKey}/deployed-start-form`
     );
 
     return {
@@ -39,7 +39,7 @@ export const startProcess = createAsyncThunk(
   "process/startProcess",
   async function (payload) {
     const response = await axios.post(
-      `http://localhost:8080/engine-rest/process-definition/key/${payload.processKey}/start`,
+      `http://localhost:8080/engine-rest/process-definition/${payload.processKey}/start`,
       { variables: payload.processBody }
     );
     return response.data;

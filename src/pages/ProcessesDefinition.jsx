@@ -10,50 +10,60 @@ export default function ProcessesDefinition() {
   const { showModal, processKey, processFields, processBody, processHtmlForm } =
     useSelector(state => state.process);
   const [processes, setprocesses] = useState([]);
+  const [processesA, setprocessesA] = useState([]);
   // let processes = [];
+  let a = [];
   useEffect(() => {
     if (data) {
-      const datsa = [...data];
+      const processes = [...data];
 
+      const grpoupedProcesses = {};
       setprocesses(
-        datsa
-          .sort((a, b) => {
-            if (a.name == b.name) {
-              if (a.version > b.version) {
-                return -1;
-              }
-              if (a.version < b.version) {
-                return 1;
-              }
-            }
-            if (a.name > b.name) {
-              return -1;
-            }
-            if (a.name < b.name) {
-              return 1;
-            }
-          })
-          .map(p => {
-            return (
-              <Process
-                deploymentId={p.deploymentId}
-                name={p.name}
-                pkey={p.key}
-                key={p.id}
-                id={p.id}
-                setShowModal={setShowModal}
-                version={p.version}
-              />
-            );
-          })
+        processes.map(p => {
+          return (
+            <Process
+              deploymentId={p.deploymentId}
+              name={p.name}
+              pkey={p.key}
+              key={p.id}
+              id={p.id}
+              setShowModal={setShowModal}
+              version={p.version}
+            />
+          );
+        })
       );
+      processes.forEach(p => {
+        if (!grpoupedProcesses[p.key]) {
+          grpoupedProcesses[p.key] = {
+            name: p.name,
+            versions: [{ version: p.version, id: p.id }],
+          };
+        } else {
+          grpoupedProcesses[p.key].versions.push({
+            version: p.version,
+            id: p.id,
+          });
+        }
+      });
+
+      for (const key in grpoupedProcesses) {
+        a.push(
+          <Process
+            setShowModal={setShowModal}
+            process={grpoupedProcesses[key]}
+          />
+        );
+      }
+      setprocessesA(a);
     }
   }, [data]);
   return isLoading ? (
     <div>Loading</div>
   ) : (
     <div className='p-3'>
-      {processes}
+
+      {processesA}
       <ProcessStartModal
         show={showModal}
         setShowModal={setShowModal}

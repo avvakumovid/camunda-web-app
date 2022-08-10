@@ -12,7 +12,12 @@ export default function Tasks() {
   ) : (
     <div className='p-3'>
       {data.map(t => (
-        <Task deploymentId={t.deploymentId} name={t.name} taskId={t.id} />
+        <Task
+          key={t.id}
+          deploymentId={t.deploymentId}
+          name={t.name}
+          taskId={t.id}
+        />
       ))}
     </div>
   );

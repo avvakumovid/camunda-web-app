@@ -124,7 +124,7 @@ function Diagram() {
         Deploy
       </button>
 
-      {/* <div id='form'></div> */}
+      <div id='form'></div>
     </div>
   );
 }

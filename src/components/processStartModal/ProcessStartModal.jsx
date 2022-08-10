@@ -45,17 +45,7 @@ export default function ProcessStartModal({
           ></div>
 
           <div className='flex flex-row mt-4 justify-around'>
-            <input
-              className='bg-purple-400 rounded-md p-2 text-white min-w-[90px]'
-              type='submit'
-              value='Send Request'
-              // onClick={e => {
-              //   e.preventDefault();
-              //   //console.log(e.target.summa);
-              //   // dispatch(startProcess({ processBody, processKey }));
-              //   // dispatch(setShowModal());
-              // }}
-            />
+
             <button
               className='bg-purple-400 rounded-md p-2 text-white min-w-[90px]'
               onClick={() => {

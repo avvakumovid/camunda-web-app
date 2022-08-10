@@ -6,6 +6,7 @@ import {
   useGetTaskFormVariablesQuery,
 } from "../store/processes/processes.api";
 import { useSelector } from "react-redux";
+import FormAlt from "../components/form/FormAlt";
 
 export default function TaskInstance() {
   const { taskId } = useParams();
@@ -40,24 +41,17 @@ export default function TaskInstance() {
             // console.log(JSON.stringify(obj));
           }}
         >
+          <FormAlt data={data} />
           <div
             className='content'
             dangerouslySetInnerHTML={{ __html: error.data }}
           ></div>
-          <input
-            className='bg-purple-400 mt-2 rounded-md p-2 text-white min-w-[90px]'
-            type='submit'
-            value='Send Request'
-            // onClick={e => {
-            //   e.preventDefault();
-            //   //console.log(e.target.summa);
-            //   // dispatch(startProcess({ processBody, processKey }));
-            //   // dispatch(setShowModal());
-            // }}
-          />
         </form>
       ) : (
-        <span>Ошибка при загрузки формы</span>
+        <>
+          <span>Ошибка при загрузки формы</span>
+          <FormAlt data={data} />
+        </>
       )}
     </div>
   );
